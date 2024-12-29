@@ -98,3 +98,37 @@ fun DetailView(
     }
 }
 
+@Composable
+fun DetailStatus(
+    mhsUiState: DetailMhsUiState,
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    when (mhsUiState) {
+        is DetailMhsUiState.Success -> {
+            DetailCard(
+                mahasiswa = mhsUiState.mahasiswa,
+                modifier = modifier.padding(16.dp)
+            )
+        }
+
+        is DetailMhsUiState.Loading -> {
+            Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                CircularProgressIndicator()
+            }
+        }
+
+        is DetailMhsUiState.Error -> {
+            Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Terjadi kesalahan.")
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Button(onClick = retryAction) {
+                        Text(text = "Coba Lagi")
+                    }
+                }
+            }
+        }
+    }
+}
+
