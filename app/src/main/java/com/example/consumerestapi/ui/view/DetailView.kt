@@ -162,3 +162,26 @@ fun DetailCard(
     }
 }
 
+@Composable
+fun ComponentDetailMhs(
+    modifier: Modifier = Modifier,
+    judul: String,
+    isinya: String,
+) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(
+            text = "$judul:",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Gray
+        )
+        Text(
+            text = isinya,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+        )
+    }
+}
