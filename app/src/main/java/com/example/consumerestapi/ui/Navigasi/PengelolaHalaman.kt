@@ -48,4 +48,23 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                 }
             )
         }
+        composable(
+            route = DestinasiDetail.routeWithArgs,
+            arguments = listOf(navArgument(DestinasiDetail.nim){
+                type = NavType.StringType
+            })
+        ){ backStackEntry ->
+            val nim = backStackEntry.arguments?.getString(DestinasiDetail.nim)
+            nim?.let {
+                DetailView(
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
+                    onEditClick = { nim ->
+                        navController.navigate("${DestinasiEdit.route}/$nim")
+                        println(nim)
+                    }
+                )
+            }
+        }
         
